@@ -1,13 +1,16 @@
 name: build-push-update-manifests
 
+# env:
+#   REGISTRY: jed.ocir.io
+#   env_var_name_mapping: >
+#     {
+#       "prod": "production",
+#       "stg": "staging",
+#       "dev": "development",
+#     }
+
 env:
-  REGISTRY: jed.ocir.io
-  env_var_name_mapping: >
-    {
-      "prod": "production",
-      "stg": "staging",
-      "dev": "development",
-    }
+  REGISTRY: docker.io
 
 on:
   workflow_call:
@@ -98,7 +101,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/axvp4vawnqyw/${{ github.event.repository.name }}
+          images: ${{ env.REGISTRY }}/123456789awad/${{ github.event.repository.name }}
 
       - name: Login to REGISTRY
         if: startsWith(github.head_ref, 'feature/') || contains(fromJSON('["dev", "stg", "prod"]'), github.ref_name)
