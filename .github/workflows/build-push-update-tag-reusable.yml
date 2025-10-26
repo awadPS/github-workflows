@@ -120,7 +120,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           file: Dockerfile
-          push: ${{ startsWith(github.head_ref, 'feature/') || contains(fromJSON('["dev", "stg", "prod"]'), github.ref_name) }}
+          push: true
           tags: ${{ env.REGISTRY }}/123456789awad/${{ github.event.repository.name }}:${{ steps.prepare-vars.outputs.sha8 }}
           labels: ${{ steps.meta.outputs.labels }}
           # Couldn't find a way to make this accept any arbitrary variables, so it will assign all possible variables
