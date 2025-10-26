@@ -227,7 +227,7 @@ jobs:
         run: |
           # Change Helm values image tag
           sed -i --regexp-extended 's|^  tag: "[a-zA-Z0-9]{4,10}"|  tag: "${{ needs.build-push.outputs.sha8 }}"|g' ${{ github.ref_name }}.yaml
-        if: contains(fromJSON('["dev", "stg", "prod"]'), github.ref_name)
+      ###f: contains(fromJSON('["dev", "stg", "prod"]'), github.ref_name)
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
