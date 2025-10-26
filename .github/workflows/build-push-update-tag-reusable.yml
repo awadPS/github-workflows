@@ -11,6 +11,12 @@ name: build-push-update-manifests
 
 env:
   REGISTRY: docker.io
+  env_var_name_mapping: >
+    {
+      "prod": "production",
+      "stg": "staging",
+      "dev": "development",
+    }
 
 on:
   workflow_call:
@@ -104,7 +110,6 @@ jobs:
           images: ${{ env.REGISTRY }}/123456789awad/${{ github.event.repository.name }}
 
       - name: Login to REGISTRY
-        if: startsWith(github.head_ref, 'feature/') || contains(fromJSON('["dev", "stg", "prod"]'), github.ref_name)
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.REGISTRY_USERNAME }}
@@ -116,7 +121,7 @@ jobs:
         with:
           file: Dockerfile
           push: ${{ startsWith(github.head_ref, 'feature/') || contains(fromJSON('["dev", "stg", "prod"]'), github.ref_name) }}
-          tags: ${{ env.REGISTRY }}/axvp4vawnqyw/${{ github.event.repository.name }}:${{ steps.prepare-vars.outputs.sha8 }}
+          tags: ${{ env.REGISTRY }}/123456789awad/${{ github.event.repository.name }}:${{ steps.prepare-vars.outputs.sha8 }}
           labels: ${{ steps.meta.outputs.labels }}
           # Couldn't find a way to make this accept any arbitrary variables, so it will assign all possible variables
           build-args: |
