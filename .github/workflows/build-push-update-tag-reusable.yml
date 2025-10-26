@@ -226,6 +226,9 @@ jobs:
         working-directory: helm-releases/${{ steps.split-repo-name.outputs._0 }}/${{ steps.split-repo-name.outputs._1 }}
         run: |
           # Change Helm values image tag
+          pwd
+          du
+          ls
           sed -i --regexp-extended 's|^  tag: "[a-zA-Z0-9]{4,10}"|  tag: "${{ needs.build-push.outputs.sha8 }}"|g' ${{ github.ref_name }}.yaml
       ###f: contains(fromJSON('["dev", "stg", "prod"]'), github.ref_name)
 
